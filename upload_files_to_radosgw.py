@@ -32,14 +32,14 @@ conn = S3Connection(
     is_secure=False,  # uncomment if you are not using ssl
     calling_format=boto.s3.connection.OrdinaryCallingFormat(),
 )
-# 如果没有 <deploy_bucket> 则创建一个
+# if have no bucket <deploy_bucket> , create new one
 try:
     bucket = conn.get_bucket(args.deploy_bucket_name)
 except:
     bucket = conn.create_bucket(args.deploy_bucket_name)
 
 bucket.set_canned_acl('public-read')
-# 从 root_dir 上传所有文件，并按照目录/文件名的方式组合成 key,key 的 mime type 由 headers 决定
+
 for parent,dirnames,filenames in os.walk(args.root_dir):
     for filename in filenames:
         key = bucket.new_key(os.path.join(parent[str_len+1:],filename))
