@@ -22,7 +22,7 @@ args = parser.parse_args()
 # port = 0
 # deploy_bucket_name = ''
 
-str_len = len(root_dir)
+str_len = len(args.root_dir)
 
 conn = S3Connection(
     aws_access_key_id=args.access_key,
